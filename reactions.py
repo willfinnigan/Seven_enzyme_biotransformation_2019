@@ -1,23 +1,37 @@
 import kinetics
 
+#est_fwd
+#est_rev
+#car
+#ptdh_nad
+#ptdh_nadp
+#ppiase
+#pap_fwd
+#pap_rev
+#ak_fwd
+#ak_rev
+#aldehyde_degradation
+#adh_fwd
+#adh_rev
+
 # ---- Esterase with water ----
-est_fwd_pingpong = kinetics.Two_ping_pong_irr(kcat="est_kcat_fwd", kma="est_km_ester", kmb='est_km_water',
-                                              a='Ester', b='H2O', enz='est',
-                                              substrates=['Ester', "H2O"],
-                                              products=['Acid', 'MeOH'])
+est_fwd = kinetics.Two_ping_pong_irr(kcat="est_kcat_fwd", kma="est_km_ester", kmb='est_km_water',
+                                     a='Ester', b='H2O', enz='est',
+                                     substrates=['Ester', "H2O"],
+                                     products=['Acid', 'MeOH'])
 
-est_rev_pingpong = kinetics.Two_ping_pong_irr(kcat="est_kcat_rev", kma="est_km_acid", kmb='est_km_meoh',
-                                              a='Acid', b='MeOH', enz='est',
-                                              substrates=['Acid', 'MeOH'],
-                                              products=['Ester', "H2O"])
+est_rev = kinetics.Two_ping_pong_irr(kcat="est_kcat_rev", kma="est_km_acid", kmb='est_km_meoh',
+                                     a='Acid', b='MeOH', enz='est',
+                                     substrates=['Acid', 'MeOH'],
+                                     products=['Ester', "H2O"])
 
-est_fwd_pingpong.parameter_bounds = {"est_kcat_fwd": (4.5, 7.5),
-                                     "est_km_ester": (1125, 1875),
-                                     "est_km_water" : (1000, 100000)}
+est_fwd.parameter_bounds = {"est_kcat_fwd": (4.5, 7.5),
+                            "est_km_ester": (1125, 1875),
+                            "est_km_water" : (1000, 100000)}
 
-est_rev_pingpong.parameter_bounds = {"est_kcat_rev": (1, 50),
-                                     "est_km_meoh": (1000, 100000),
-                                     "est_km_acid" : (100, 100000)}
+est_rev.parameter_bounds = {"est_kcat_rev": (1, 50),
+                            "est_km_meoh": (1000, 100000),
+                            "est_km_acid" : (100, 100000)}
                                      
 car = kinetics.Three_ter_ord_irr(kcat="car_kcat",
                                  kma="car_km_atp", kmb="car_km_acid", kmc="car_km_nadph", kia="car_kia_atp",
