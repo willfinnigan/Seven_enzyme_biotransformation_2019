@@ -1,3 +1,5 @@
+import kinetics
+
 # ---- Esterase with water ----
 est_fwd_pingpong = kinetics.Two_ping_pong_irr(kcat="est_kcat_fwd", kma="est_km_ester", kmb='est_km_water',
                                               a='Ester', b='H2O', enz='est',
